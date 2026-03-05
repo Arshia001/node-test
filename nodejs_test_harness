@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TEST_ROOT="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+TOOLS_ROOT="${TEST_ROOT}/tools"
+RUN_CWD=""
+
+resolve_run_cwd() {
+  local test_dir_basename
+  test_dir_basename="$(basename -- "${TEST_ROOT}")"
+
+  # Many core tests invoke child processes with paths like `test/fixtures/...`.
+  # Run from a workspace root where `test/` resolves to this vendored suite.
+  if [[ "${test_dir_basename}" == "test" ]]; then
+    RUN_CWD="$(dirname -- "${TEST_ROOT}")"
+    return
+  fi
+
+  local alias_root="${TEST_ROOT}/.workspace"
+  mkdir -p "${alias_root}"
+  ln -sfn "${TEST_ROOT}" "${alias_root}/test"
+  RUN_CWD="${alias_root}"
+}
+
+resolve_runner() {
+  local requested="${NODE_TEST_RUNNER:-node}"
+
+  if [[ "${requested}" == "node" ]]; then
+    if [[ -n "${NODE_TEST_NODE_BINARY:-}" && -x "${NODE_TEST_NODE_BINARY}" ]]; then
+      printf '%s\n' "${NODE_TEST_NODE_BINARY}"
+      return
+    fi
+    if [[ -x "${TEST_ROOT}/../out/Release/node" ]]; then
+      printf '%s\n' "${TEST_ROOT}/../out/Release/node"
+      return
+    fi
+    if [[ -x "${TEST_ROOT}/../out/Debug/node" ]]; then
+      printf '%s\n' "${TEST_ROOT}/../out/Debug/node"
+      return
+    fi
+    local node_in_path
+    node_in_path="$(command -v node 2>/dev/null || true)"
+    if [[ -n "${node_in_path}" ]]; then
+      printf '%s\n' "${node_in_path}"
+      return
+    fi
+    echo "Could not resolve a Node binary. Set NODE_TEST_RUNNER or NODE_TEST_NODE_BINARY." >&2
+    exit 1
+  fi
+
+  if [[ "$(basename -- "${requested}")" == "deno" ]]; then
+    printf '%s\n' "${TEST_ROOT}/tools/deno-node-runner"
+    return
+  fi
+
+  if [[ "${requested}" != */* ]]; then
+    local resolved
+    resolved="$(command -v "${requested}" 2>/dev/null || true)"
+    if [[ -n "${resolved}" ]]; then
+      printf '%s\n' "${resolved}"
+      return
+    fi
+  fi
+
+  printf '%s\n' "${requested}"
+}
+
+suites=()
+while IFS= read -r suite; do
+  suites+=("${suite}")
+done < <(python3 - "${TEST_ROOT}" <<'PY'
+import os
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+excluded = {
+    'cctest',
+    'benchmark',
+    'addons',
+    'doctool',
+    'embedding',
+    'overlapped-checker',
+    'wasi',
+    'v8-updates',
+    'code-cache',
+    'internet',
+    'tick-processor',
+    'pummel',
+    'wpt',
+}
+for value in os.environ.get('NODE_TEST_EXCLUDE_SUITES', '').split(','):
+    value = value.strip()
+    if value:
+        excluded.add(value)
+
+for entry in sorted(root.iterdir()):
+    if not entry.is_dir():
+        continue
+    if entry.name in excluded:
+        continue
+    if (entry / 'testcfg.py').is_file():
+        print(entry.name)
+PY
+)
+
+if [[ ${#suites[@]} -eq 0 ]]; then
+  echo "No test suites were selected."
+  exit 1
+fi
+
+runner="$(resolve_runner)"
+resolve_run_cwd
+
+unset FORCE_COLOR
+unset NO_COLOR
+
+cd "${RUN_CWD}"
+
+exec python3 "${TOOLS_ROOT}/test.py" \
+  --timeout 10 \
+  --test-root "${TEST_ROOT}" \
+  --shell "${runner}" \
+  "${suites[@]}" \
+  "$@"
