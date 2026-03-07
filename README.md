@@ -40,11 +40,11 @@ For the tests to run on Windows, be sure to clone Node.js source code with the
 
 ## Cross-runtime runner
 
-Use `test/execute_the_tests` to run the JavaScript suites with a selectable
+Use `test/nodejs_test_harness` to run the JavaScript suites with a selectable
 runtime:
 
 ```sh
-NODE_TEST_RUNNER=node ./test/execute_the_tests
+NODE_TEST_RUNNER=node ./test/nodejs_test_harness
 ```
 
 This runner:
@@ -62,6 +62,21 @@ This runner:
 
 Tests in `parallel/` are run in parallel and tests in `sequential/` are run
 serially using the existing `tools/test.py` scheduling.
+
+### Category filters
+
+You can run only the tests that belong to one or more generated module
+categories:
+
+```sh
+./test/nodejs_test_harness --category=node:assert
+./test/nodejs_test_harness --categories=node:assert,node:buffer
+```
+
+When category filters are used, the harness refreshes
+`test/module-categories/*.txt` via
+`test/tools/generate_test_module_categories.py` and expands the selected
+categories into explicit test paths before invoking `tools/test.py`.
 
 ### `// Flags:` skipping
 

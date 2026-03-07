@@ -3,7 +3,18 @@ set -euo pipefail
 
 TEST_ROOT="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 TOOLS_ROOT="${TEST_ROOT}/tools"
+CATEGORY_ROOT="${TEST_ROOT}/module-categories"
+CATEGORY_GENERATOR="${TOOLS_ROOT}/generate_test_module_categories.py"
 RUN_CWD=""
+CATEGORY_TESTS_FILE=""
+
+cleanup() {
+  if [[ -n "${CATEGORY_TESTS_FILE}" && -f "${CATEGORY_TESTS_FILE}" ]]; then
+    rm -f "${CATEGORY_TESTS_FILE}"
+  fi
+}
+
+trap cleanup EXIT
 
 resolve_run_cwd() {
   local test_dir_basename
@@ -65,6 +76,109 @@ resolve_runner() {
   printf '%s\n' "${requested}"
 }
 
+refresh_category_lists() {
+  python3 "${CATEGORY_GENERATOR}" >/dev/null
+}
+
+load_category_tests() {
+  python3 - "${CATEGORY_ROOT}" "$@" <<'PY'
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+requested_specs = sys.argv[2:]
+
+if not root.is_dir():
+    raise SystemExit(f"Category directory not found: {root}")
+
+available = {}
+for path in sorted(root.glob("*.txt")):
+    stem = path.stem
+    if stem == "other":
+        category = "other"
+    elif stem.startswith("node_"):
+        category = f"node:{stem[len('node_'):]}"
+    else:
+        category = stem
+    available[category] = path
+
+requested = []
+for spec in requested_specs:
+    for part in spec.split(","):
+        part = part.strip()
+        if part:
+            requested.append(part)
+
+if not requested:
+    raise SystemExit("No categories were provided.")
+
+unknown = [category for category in requested if category not in available]
+if unknown:
+    print(
+        "Unknown category value(s): " + ", ".join(unknown),
+        file=sys.stderr,
+    )
+    print("Known categories:", file=sys.stderr)
+    for category in sorted(available):
+        print(category, file=sys.stderr)
+    raise SystemExit(1)
+
+selected = set()
+count = 0
+for category in requested:
+    with available[category].open(encoding="utf8") as handle:
+        for line in handle:
+            test = line.strip()
+            if not test or test in selected:
+                continue
+            selected.add(test)
+            print(test)
+            count += 1
+
+if count == 0:
+    print(
+        "No runnable tests matched categories: " + ", ".join(requested),
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
+PY
+}
+
+category_specs=()
+passthrough_args=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --category=*)
+      category_specs+=("${1#*=}")
+      shift
+      ;;
+    --category)
+      if [[ $# -lt 2 ]]; then
+        echo "Missing value for --category" >&2
+        exit 1
+      fi
+      category_specs+=("$2")
+      shift 2
+      ;;
+    --categories=*)
+      category_specs+=("${1#*=}")
+      shift
+      ;;
+    --categories)
+      if [[ $# -lt 2 ]]; then
+        echo "Missing value for --categories" >&2
+        exit 1
+      fi
+      category_specs+=("$2")
+      shift 2
+      ;;
+    *)
+      passthrough_args+=("$1")
+      shift
+      ;;
+  esac
+done
+
 suites=()
 while IFS= read -r suite; do
   suites+=("${suite}")
@@ -109,6 +223,25 @@ if [[ ${#suites[@]} -eq 0 ]]; then
   exit 1
 fi
 
+target_args=("${suites[@]}")
+if [[ ${#category_specs[@]} -gt 0 ]]; then
+  refresh_category_lists
+  CATEGORY_TESTS_FILE="$(mktemp "${TEST_ROOT}/.tmp.category-tests.XXXXXX")"
+  if ! load_category_tests "${category_specs[@]}" > "${CATEGORY_TESTS_FILE}"; then
+    exit 1
+  fi
+
+  target_args=()
+  while IFS= read -r test_selector; do
+    target_args+=("${test_selector}")
+  done < "${CATEGORY_TESTS_FILE}"
+
+  if [[ ${#target_args[@]} -eq 0 ]]; then
+    echo "No tests were selected from the requested categories." >&2
+    exit 1
+  fi
+fi
+
 runner="$(resolve_runner)"
 resolve_run_cwd
 
@@ -117,9 +250,16 @@ unset NO_COLOR
 
 cd "${RUN_CWD}"
 
-exec python3 "${TOOLS_ROOT}/test.py" \
-  --timeout 10 \
-  --test-root "${TEST_ROOT}" \
-  --shell "${runner}" \
-  "${suites[@]}" \
-  "$@"
+command=(
+  python3 "${TOOLS_ROOT}/test.py"
+  --timeout 10
+  --test-root "${TEST_ROOT}"
+  --shell "${runner}"
+  "${target_args[@]}"
+)
+
+if [[ ${#passthrough_args[@]} -gt 0 ]]; then
+  command+=("${passthrough_args[@]}")
+fi
+
+exec "${command[@]}"
