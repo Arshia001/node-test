@@ -7,10 +7,14 @@ CATEGORY_ROOT="${TEST_ROOT}/module-categories"
 CATEGORY_GENERATOR="${TOOLS_ROOT}/generate_test_module_categories.py"
 RUN_CWD=""
 CATEGORY_TESTS_FILE=""
+COUNTS_OUTPUT_FILE=""
 
 cleanup() {
   if [[ -n "${CATEGORY_TESTS_FILE}" && -f "${CATEGORY_TESTS_FILE}" ]]; then
     rm -f "${CATEGORY_TESTS_FILE}"
+  fi
+  if [[ -n "${COUNTS_OUTPUT_FILE}" && -f "${COUNTS_OUTPUT_FILE}" ]]; then
+    rm -f "${COUNTS_OUTPUT_FILE}"
   fi
 }
 
@@ -144,10 +148,41 @@ if count == 0:
 PY
 }
 
+print_counts_only() {
+  python3 - "$1" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+text = Path(sys.argv[1]).read_text(encoding='utf-8', errors='replace')
+text = text.replace('\r', '\n')
+ansi_pattern = re.compile(r'\x1b\[[0-9;?]*[ -/]*[@-~]')
+done_pattern = re.compile(r'\+\s*(\d+)\|-\s*(\d+)\]: Done\b')
+
+for raw_line in reversed(text.splitlines()):
+    line = ansi_pattern.sub('', raw_line)
+    match = done_pattern.search(line)
+    if match is None:
+        continue
+    passed = int(match.group(1))
+    failed = int(match.group(2))
+    total = passed + failed
+    print(f'total={total} passed={passed} failed={failed}')
+    raise SystemExit(0)
+
+raise SystemExit('Could not parse test counts.')
+PY
+}
+
+counts_only=0
 category_specs=()
 passthrough_args=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --counts-only)
+      counts_only=1
+      shift
+      ;;
     --category=*)
       category_specs+=("${1#*=}")
       shift
@@ -260,6 +295,18 @@ command=(
 
 if [[ ${#passthrough_args[@]} -gt 0 ]]; then
   command+=("${passthrough_args[@]}")
+fi
+
+if [[ ${counts_only} -eq 1 ]]; then
+  COUNTS_OUTPUT_FILE="$(mktemp "${TEST_ROOT}/.tmp.counts-output.XXXXXX")"
+  if "${command[@]}" > "${COUNTS_OUTPUT_FILE}" 2>&1; then
+    status=0
+  else
+    status=$?
+  fi
+
+  print_counts_only "${COUNTS_OUTPUT_FILE}"
+  exit "${status}"
 fi
 
 exec "${command[@]}"
