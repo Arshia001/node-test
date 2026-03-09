@@ -9,13 +9,20 @@ parallel/test-tls-async-cb-after-socket-end.js
 parallel/test-tls-basic-validations.js
 parallel/test-tls-buffersize.js
 parallel/test-tls-ca-concat.js
+parallel/test-tls-canonical-ip.js
 parallel/test-tls-cert-chains-concat.js
 parallel/test-tls-cert-chains-in-ca.js
 parallel/test-tls-cert-ext-encoding.js
 parallel/test-tls-cert-regression.js
 parallel/test-tls-check-server-identity.js
 parallel/test-tls-cipher-list.js
+parallel/test-tls-cli-max-version-1.2.js
+parallel/test-tls-cli-max-version-1.3.js
 parallel/test-tls-cli-min-max-conflict.js
+parallel/test-tls-cli-min-version-1.0.js
+parallel/test-tls-cli-min-version-1.1.js
+parallel/test-tls-cli-min-version-1.2.js
+parallel/test-tls-cli-min-version-1.3.js
 parallel/test-tls-client-abort.js
 parallel/test-tls-client-abort2.js
 parallel/test-tls-client-allow-partial-trust-chain.js
@@ -23,6 +30,7 @@ parallel/test-tls-client-auth.js
 parallel/test-tls-client-default-ciphers.js
 parallel/test-tls-client-destroy-soon.js
 parallel/test-tls-client-getephemeralkeyinfo.js
+parallel/test-tls-client-mindhsize.js
 parallel/test-tls-client-reject-12.js
 parallel/test-tls-client-reject.js
 parallel/test-tls-client-renegotiation-13.js
@@ -31,9 +39,11 @@ parallel/test-tls-client-resume-12.js
 parallel/test-tls-client-resume.js
 parallel/test-tls-client-verify.js
 parallel/test-tls-clientcertengine-invalid-arg-type.js
+parallel/test-tls-clientcertengine-unsupported.js
 parallel/test-tls-close-error.js
 parallel/test-tls-close-event-after-write.js
 parallel/test-tls-close-notify.js
+parallel/test-tls-cnnic-whitelist.js
 parallel/test-tls-connect-abort-controller.js
 parallel/test-tls-connect-address-family.js
 parallel/test-tls-connect-allow-half-open-option.js
@@ -52,6 +62,7 @@ parallel/test-tls-delayed-attach.js
 parallel/test-tls-destroy-stream-12.js
 parallel/test-tls-destroy-stream.js
 parallel/test-tls-destroy-whilst-write.js
+parallel/test-tls-dhe.js
 parallel/test-tls-disable-renegotiation.js
 parallel/test-tls-ecdh-auto.js
 parallel/test-tls-ecdh-multiple.js
@@ -59,6 +70,8 @@ parallel/test-tls-ecdh.js
 parallel/test-tls-econnreset.js
 parallel/test-tls-empty-sni-context.js
 parallel/test-tls-enable-keylog-cli.js
+parallel/test-tls-enable-trace-cli.js
+parallel/test-tls-enable-trace.js
 parallel/test-tls-env-bad-extra-ca.js
 parallel/test-tls-env-extra-ca-no-crypto.js
 parallel/test-tls-env-extra-ca-with-options.js
@@ -97,6 +110,7 @@ parallel/test-tls-junk-closes-server.js
 parallel/test-tls-junk-server.js
 parallel/test-tls-key-mismatch.js
 parallel/test-tls-keyengine-invalid-arg-type.js
+parallel/test-tls-keyengine-unsupported.js
 parallel/test-tls-keylog-tlsv13.js
 parallel/test-tls-legacy-pfx.js
 parallel/test-tls-max-send-fragment.js
@@ -130,6 +144,7 @@ parallel/test-tls-psk-circuit.js
 parallel/test-tls-psk-errors.js
 parallel/test-tls-psk-server.js
 parallel/test-tls-reduced-SECLEVEL-in-cipher.js
+parallel/test-tls-reinitialize-listeners.js
 parallel/test-tls-request-timeout.js
 parallel/test-tls-retain-handle-no-abort.js
 parallel/test-tls-reuse-host-from-socket.js
@@ -146,7 +161,9 @@ parallel/test-tls-session-cache.js
 parallel/test-tls-session-timeout-errors.js
 parallel/test-tls-set-ciphers-error.js
 parallel/test-tls-set-ciphers.js
+parallel/test-tls-set-default-ca-certificates-append-fetch.mjs
 parallel/test-tls-set-default-ca-certificates-append-https-request.js
+parallel/test-tls-set-default-ca-certificates-array-buffer.js
 parallel/test-tls-set-default-ca-certificates-basic.js
 parallel/test-tls-set-default-ca-certificates-error.js
 parallel/test-tls-set-default-ca-certificates-extra-override.js
@@ -154,6 +171,7 @@ parallel/test-tls-set-default-ca-certificates-mixed-types.js
 parallel/test-tls-set-default-ca-certificates-precedence-bundled.js
 parallel/test-tls-set-default-ca-certificates-precedence-empty.js
 parallel/test-tls-set-default-ca-certificates-recovery.js
+parallel/test-tls-set-default-ca-certificates-reset-fetch.mjs
 parallel/test-tls-set-default-ca-certificates-reset-https-request.js
 parallel/test-tls-set-encoding.js
 parallel/test-tls-set-secure-context.js
@@ -181,12 +199,15 @@ parallel/test-tls-timeout-server.js
 parallel/test-tls-tlswrap-segfault-2.js
 parallel/test-tls-tlswrap-segfault.js
 parallel/test-tls-translate-peer-certificate.js
+parallel/test-tls-transport-destroy-after-own-gc.js
 parallel/test-tls-use-after-free-regression.js
 parallel/test-tls-wrap-econnreset-localaddress.js
 parallel/test-tls-wrap-econnreset-pipe.js
 parallel/test-tls-wrap-econnreset-socket.js
 parallel/test-tls-wrap-econnreset.js
 parallel/test-tls-wrap-event-emmiter.js
+parallel/test-tls-wrap-no-abort.js
+parallel/test-tls-wrap-timeout.js
 parallel/test-tls-write-error.js
 parallel/test-tls-writewrap-leak.js
 parallel/test-tls-zero-clear-in.js

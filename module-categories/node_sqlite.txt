@@ -7,10 +7,11 @@ parallel/test-sqlite-data-types.js
 parallel/test-sqlite-database-sync-dispose.js
 parallel/test-sqlite-database-sync.js
 parallel/test-sqlite-named-parameters.js
+parallel/test-sqlite-session.js
 parallel/test-sqlite-statement-sync-columns.js
+parallel/test-sqlite-statement-sync.js
 parallel/test-sqlite-template-tag.js
 parallel/test-sqlite-timeout.js
 parallel/test-sqlite-transactions.js
 parallel/test-sqlite-typed-array-and-data-view.js
 parallel/test-sqlite.js
-sqlite/test_sqlite_extensions/test.js

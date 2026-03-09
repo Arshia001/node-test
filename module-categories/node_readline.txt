@@ -2,6 +2,7 @@ parallel/test-readline-async-iterators-backpressure.js
 parallel/test-readline-async-iterators-destroy.js
 parallel/test-readline-async-iterators.js
 parallel/test-readline-carriage-return-between-chunks.js
+parallel/test-readline-csi.js
 parallel/test-readline-emit-keypress-events.js
 parallel/test-readline-input-onerror.js
 parallel/test-readline-interface-escapecodetimeout.js
@@ -10,6 +11,9 @@ parallel/test-readline-interface-recursive-writes.js
 parallel/test-readline-interface.js
 parallel/test-readline-keys.js
 parallel/test-readline-line-separators.js
+parallel/test-readline-position.js
+parallel/test-readline-promises-csi.mjs
+parallel/test-readline-promises-interface.js
 parallel/test-readline-promises-tab-complete.js
 parallel/test-readline-reopen.js
 parallel/test-readline-set-raw-mode.js

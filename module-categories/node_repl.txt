@@ -36,7 +36,6 @@ parallel/test-repl-no-terminal.js
 parallel/test-repl-null-thrown.js
 parallel/test-repl-null.js
 parallel/test-repl-options.js
-parallel/test-repl-permission-model.js
 parallel/test-repl-persistent-history.js
 parallel/test-repl-preprocess-top-level-await.js
 parallel/test-repl-pretty-custom-stack.js

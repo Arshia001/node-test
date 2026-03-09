@@ -9,6 +9,9 @@ parallel/test-event-emitter-invalid-listener.js
 parallel/test-event-emitter-listener-count.js
 parallel/test-event-emitter-listeners-side-effects.js
 parallel/test-event-emitter-listeners.js
+parallel/test-event-emitter-max-listeners-warning-for-null.js
+parallel/test-event-emitter-max-listeners-warning-for-symbol.js
+parallel/test-event-emitter-max-listeners-warning.js
 parallel/test-event-emitter-max-listeners.js
 parallel/test-event-emitter-method-names.js
 parallel/test-event-emitter-modify-in-emit.js
@@ -25,10 +28,13 @@ parallel/test-event-emitter-symbols.js
 parallel/test-event-target.js
 parallel/test-eventemitter-asyncresource.js
 parallel/test-events-add-abort-listener.mjs
+parallel/test-events-customevent.js
 parallel/test-events-getmaxlisteners.js
 parallel/test-events-list.js
 parallel/test-events-listener-count-with-listener.js
+parallel/test-events-on-async-iterator.js
 parallel/test-events-once.js
 parallel/test-events-static-geteventlisteners.js
 parallel/test-events-uncaught-exception-stack.js
 parallel/test-eventsource-disabled.js
+parallel/test-eventsource.js

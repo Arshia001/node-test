@@ -40,6 +40,7 @@ parallel/test-net-connect-memleak.js
 parallel/test-net-connect-no-arg.js
 parallel/test-net-connect-nodelay.js
 parallel/test-net-connect-options-allowhalfopen.js
+parallel/test-net-connect-options-fd.js
 parallel/test-net-connect-options-invalid.js
 parallel/test-net-connect-options-ipv6.js
 parallel/test-net-connect-options-path.js
@@ -55,6 +56,7 @@ parallel/test-net-dns-lookup-skip.js
 parallel/test-net-dns-lookup.js
 parallel/test-net-during-close.js
 parallel/test-net-eaddrinuse.js
+parallel/test-net-end-close.js
 parallel/test-net-end-destroyed.js
 parallel/test-net-end-without-connect.js
 parallel/test-net-error-twice.js
@@ -70,6 +72,7 @@ parallel/test-net-listen-error.js
 parallel/test-net-listen-exclusive-random-ports.js
 parallel/test-net-listen-fd0.js
 parallel/test-net-listen-handle-in-cluster-1.js
+parallel/test-net-listen-handle-in-cluster-2.js
 parallel/test-net-listen-invalid-port.js
 parallel/test-net-listen-ipv6only.js
 parallel/test-net-listen-twice.js
@@ -82,6 +85,8 @@ parallel/test-net-options-lookup.js
 parallel/test-net-pause-resume-connecting.js
 parallel/test-net-perf_hooks.js
 parallel/test-net-persistent-keepalive.js
+parallel/test-net-persistent-nodelay.js
+parallel/test-net-persistent-ref-unref.js
 parallel/test-net-pingpong.js
 parallel/test-net-pipe-connect-errors.js
 parallel/test-net-pipe-with-long-path.js
@@ -98,6 +103,7 @@ parallel/test-net-server-close-before-ipc-response.js
 parallel/test-net-server-close.js
 parallel/test-net-server-drop-connections.js
 parallel/test-net-server-keepalive.js
+parallel/test-net-server-listen-handle.js
 parallel/test-net-server-listen-options-signal.js
 parallel/test-net-server-listen-options.js
 parallel/test-net-server-listen-path.js
@@ -155,6 +161,11 @@ parallel/test-socket-options-invalid.js
 parallel/test-socket-write-after-fin-error.js
 parallel/test-socket-write-after-fin.js
 parallel/test-socket-writes-before-passed-to-tls-socket.js
+parallel/test-socketaddress.js
+parallel/test-tcp-wrap-connect.js
+parallel/test-tcp-wrap-listen.js
+parallel/test-tcp-wrap.js
+parallel/test-wrap-js-stream-destroy.js
 sequential/test-net-GH-5504.js
 sequential/test-net-better-error-messages-port.js
 sequential/test-net-connect-econnrefused.js

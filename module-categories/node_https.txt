@@ -34,6 +34,7 @@ parallel/test-https-agent-disable-session-reuse.js
 parallel/test-https-agent-getname.js
 parallel/test-https-agent-keylog.js
 parallel/test-https-agent-servername.js
+parallel/test-https-agent-session-eviction.js
 parallel/test-https-agent-session-injection.js
 parallel/test-https-agent-session-reuse.js
 parallel/test-https-agent-sni.js

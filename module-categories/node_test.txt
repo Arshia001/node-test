@@ -1,3 +1,4 @@
+parallel/test-accessor-properties.js
 parallel/test-arm-math-illegal-instruction.js
 parallel/test-diff.js
 parallel/test-eslint-must-call-assert.js
@@ -8,11 +9,15 @@ parallel/test-node-output-sourcemaps.mjs
 parallel/test-node-run.js
 parallel/test-parse-test-envs.js
 parallel/test-parse-test-only-envs.js
+parallel/test-quic-internal-endpoint-options.js
+parallel/test-quic-internal-endpoint-stats-state.js
+parallel/test-quic-internal-setcallbacks.js
 parallel/test-runner-aliases.js
 parallel/test-runner-assert.js
 parallel/test-runner-cli-concurrency.js
 parallel/test-runner-cli-timeout.js
 parallel/test-runner-cli.js
+parallel/test-runner-complex-dependencies.mjs
 parallel/test-runner-concurrency.js
 parallel/test-runner-coverage-default-exclusion.mjs
 parallel/test-runner-coverage-source-map.js
@@ -24,6 +29,7 @@ parallel/test-runner-error-reporter.js
 parallel/test-runner-exit-code.js
 parallel/test-runner-extraneous-async-activity.js
 parallel/test-runner-filetest-location.js
+parallel/test-runner-filter-warning.js
 parallel/test-runner-flag-propagation.js
 parallel/test-runner-force-exit-failure.js
 parallel/test-runner-force-exit-flush.js
@@ -33,7 +39,9 @@ parallel/test-runner-import-no-scheme.js
 parallel/test-runner-misc.js
 parallel/test-runner-mock-timers-date.js
 parallel/test-runner-mock-timers-scheduler.js
+parallel/test-runner-mock-timers.js
 parallel/test-runner-mocking.js
+parallel/test-runner-module-mocking.js
 parallel/test-runner-no-isolation-different-cwd.mjs
 parallel/test-runner-no-isolation-filtering.js
 parallel/test-runner-no-isolation-hooks.mjs
@@ -48,12 +56,16 @@ parallel/test-runner-run-files-undefined.mjs
 parallel/test-runner-run-global-hooks.mjs
 parallel/test-runner-run.mjs
 parallel/test-runner-snapshot-file-tests.js
+parallel/test-runner-snapshot-tests.js
+parallel/test-runner-source-maps-invalid-json.js
+parallel/test-runner-string-to-regexp.js
 parallel/test-runner-subtest-after-hook.js
 parallel/test-runner-test-filepath.js
 parallel/test-runner-test-fullname.js
 parallel/test-runner-test-rerun-failures.js
 parallel/test-runner-todo-skip-tests.js
 parallel/test-runner-typechecking.js
+parallel/test-runner-v8-deserializer.mjs
 parallel/test-runner-wait-for.js
 parallel/test-runner-watch-mode-complex.mjs
 parallel/test-testpy-env-var-via-comment.js
@@ -68,6 +80,7 @@ test-runner/test-output-abort-suite.mjs
 test-runner/test-output-abort.mjs
 test-runner/test-output-arbitrary-output-colored.mjs
 test-runner/test-output-arbitrary-output.mjs
+test-runner/test-output-assertion-color-tty.mjs
 test-runner/test-output-async-test-scheduling.mjs
 test-runner/test-output-before-and-after-each-too-many-listeners.mjs
 test-runner/test-output-before-and-after-each-with-timeout-too-many-listeners.mjs
@@ -78,6 +91,8 @@ test-runner/test-output-coverage-width-100.mjs
 test-runner/test-output-coverage-width-150-uncovered-lines.mjs
 test-runner/test-output-coverage-width-150.mjs
 test-runner/test-output-coverage-width-40.mjs
+test-runner/test-output-coverage-width-80-color.mjs
+test-runner/test-output-coverage-width-80-uncovered-lines-color.mjs
 test-runner/test-output-coverage-width-80-uncovered-lines.mjs
 test-runner/test-output-coverage-width-80.mjs
 test-runner/test-output-coverage-width-infinity-uncovered-lines.mjs

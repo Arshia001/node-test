@@ -7,12 +7,15 @@ parallel/test-crypto-authenticated.js
 parallel/test-crypto-certificate.js
 parallel/test-crypto-cipheriv-decipheriv.js
 parallel/test-crypto-classes.js
+parallel/test-crypto-default-shake-lengths-oneshot.js
+parallel/test-crypto-default-shake-lengths.js
 parallel/test-crypto-des3-wrap.js
 parallel/test-crypto-dh-constructor.js
 parallel/test-crypto-dh-curves.js
 parallel/test-crypto-dh-errors.js
 parallel/test-crypto-dh-generate-keys.js
 parallel/test-crypto-dh-group-setters.js
+parallel/test-crypto-dh-leak.js
 parallel/test-crypto-dh-modp2-views.js
 parallel/test-crypto-dh-modp2.js
 parallel/test-crypto-dh-odd-key.js
@@ -26,7 +29,9 @@ parallel/test-crypto-ecb.js
 parallel/test-crypto-ecdh-convert-key.js
 parallel/test-crypto-encap-decap.js
 parallel/test-crypto-encoding-validation-error.js
+parallel/test-crypto-fips.js
 parallel/test-crypto-from-binary.js
+parallel/test-crypto-gcm-explicit-short-tag.js
 parallel/test-crypto-gcm-implicit-short-tag.js
 parallel/test-crypto-getcipherinfo.js
 parallel/test-crypto-hash-stream-pipe.js
@@ -95,6 +100,7 @@ parallel/test-crypto-randomuuid.js
 parallel/test-crypto-rsa-dsa.js
 parallel/test-crypto-rsa-pss-default-salt-length.js
 parallel/test-crypto-scrypt.js
+parallel/test-crypto-sec-level.js
 parallel/test-crypto-secret-keygen.js
 parallel/test-crypto-secure-heap.js
 parallel/test-crypto-sign-verify.js
@@ -105,6 +111,7 @@ parallel/test-crypto-update-encoding.js
 parallel/test-crypto-verify-failure.js
 parallel/test-crypto-webcrypto-aes-decrypt-tag-too-small.js
 parallel/test-crypto-worker-thread.js
+parallel/test-crypto-x509.js
 parallel/test-crypto.js
 parallel/test-dsa-fips-invalid-key.js
 parallel/test-eslint-crypto-check.js
@@ -118,6 +125,7 @@ parallel/test-webcrypto-derivebits-argon2.js
 parallel/test-webcrypto-derivebits-cfrg.js
 parallel/test-webcrypto-derivebits-ecdh.js
 parallel/test-webcrypto-derivebits-hkdf.js
+parallel/test-webcrypto-derivebits.js
 parallel/test-webcrypto-derivekey-cfrg.js
 parallel/test-webcrypto-derivekey-ecdh.js
 parallel/test-webcrypto-derivekey.js
@@ -137,6 +145,7 @@ parallel/test-webcrypto-get-public-key.mjs
 parallel/test-webcrypto-getRandomValues.js
 parallel/test-webcrypto-internal-slots.mjs
 parallel/test-webcrypto-keygen-kmac.js
+parallel/test-webcrypto-keygen.js
 parallel/test-webcrypto-random.js
 parallel/test-webcrypto-sign-verify-ecdsa.js
 parallel/test-webcrypto-sign-verify-eddsa.js
@@ -146,6 +155,9 @@ parallel/test-webcrypto-sign-verify-ml-dsa.js
 parallel/test-webcrypto-sign-verify-rsa.js
 parallel/test-webcrypto-sign-verify.js
 parallel/test-webcrypto-supports.mjs
+parallel/test-webcrypto-util.js
+parallel/test-webcrypto-webidl.js
 parallel/test-webcrypto-wrap-unwrap.js
 parallel/test-x509-escaping.js
 sequential/test-crypto-timing-safe-equal-fast.js
+sequential/test-crypto-timing-safe-equal.js

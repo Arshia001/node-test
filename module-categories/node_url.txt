@@ -6,6 +6,7 @@ parallel/test-url-format-invalid-input.js
 parallel/test-url-format-whatwg.js
 parallel/test-url-format.js
 parallel/test-url-invalid-file-url-path-input.js
+parallel/test-url-is-url-internal.js
 parallel/test-url-parse-format.js
 parallel/test-url-parse-invalid-input.js
 parallel/test-url-parse-query.js
@@ -16,11 +17,13 @@ parallel/test-url-urltooptions.js
 parallel/test-urlpattern-invalidthis.js
 parallel/test-urlpattern-types.js
 parallel/test-urlpattern.js
+parallel/test-whatwg-url-canparse.js
 parallel/test-whatwg-url-custom-deepequal.js
 parallel/test-whatwg-url-custom-global.js
 parallel/test-whatwg-url-custom-href-side-effect.js
 parallel/test-whatwg-url-custom-inspect.js
 parallel/test-whatwg-url-custom-parsing.js
+parallel/test-whatwg-url-custom-properties.js
 parallel/test-whatwg-url-custom-searchparams-append.js
 parallel/test-whatwg-url-custom-searchparams-constructor.js
 parallel/test-whatwg-url-custom-searchparams-delete.js

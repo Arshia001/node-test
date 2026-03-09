@@ -58,6 +58,7 @@ parallel/test-child-process-fork-timeout-kill-signal.js
 parallel/test-child-process-fork-url.mjs
 parallel/test-child-process-fork.js
 parallel/test-child-process-fork3.js
+parallel/test-child-process-http-socket-leak.js
 parallel/test-child-process-internal.js
 parallel/test-child-process-ipc-next-tick.js
 parallel/test-child-process-ipc.js
@@ -90,7 +91,9 @@ parallel/test-child-process-spawn-windows-batch-file.js
 parallel/test-child-process-spawnsync-args.js
 parallel/test-child-process-spawnsync-env.js
 parallel/test-child-process-spawnsync-input.js
+parallel/test-child-process-spawnsync-kill-signal.js
 parallel/test-child-process-spawnsync-maxbuf.js
+parallel/test-child-process-spawnsync-shell.js
 parallel/test-child-process-spawnsync-timeout.js
 parallel/test-child-process-spawnsync-validation-errors.js
 parallel/test-child-process-spawnsync.js
@@ -107,14 +110,17 @@ parallel/test-child-process-stdout-flush.js
 parallel/test-child-process-stdout-ipc.js
 parallel/test-child-process-uid-gid.js
 parallel/test-child-process-validate-stdio.js
+parallel/test-child-process-windows-hide.js
 parallel/test-common-countdown.js
 parallel/test-common-expect-warning.js
 parallel/test-dummy-stdio.js
 parallel/test-force-repl-with-eval.js
 parallel/test-force-repl.js
 parallel/test-hash-seed.mjs
+parallel/test-internal-util-decorate-error-stack.js
 parallel/test-intl.js
 parallel/test-math-random.js
+parallel/test-navigator.js
 parallel/test-pending-deprecation.js
 parallel/test-pipe-head.js
 parallel/test-preload-worker.js

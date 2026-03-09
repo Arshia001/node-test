@@ -1,3 +1,4 @@
+parallel/test-cluster-accept-fail.js
 parallel/test-cluster-advanced-serialization.js
 parallel/test-cluster-basic.js
 parallel/test-cluster-bind-privileged-port.js
@@ -8,6 +9,7 @@ parallel/test-cluster-child-index-net.js
 parallel/test-cluster-concurrent-disconnect.js
 parallel/test-cluster-cwd.js
 parallel/test-cluster-dgram-2.js
+parallel/test-cluster-dgram-bind-fd.js
 parallel/test-cluster-dgram-ipv6only.js
 parallel/test-cluster-dgram-reuse.js
 parallel/test-cluster-dgram-reuseport.js
