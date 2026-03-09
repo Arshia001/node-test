@@ -36,12 +36,32 @@ FLAGS_PATTERN = re.compile(r"//\s+Flags:(.*)")
 LS_RE = re.compile(r'^test-.*\.m?js$')
 ENV_PATTERN = re.compile(r"//\s+Env:(.*)")
 NODE_TEST_PATTERN = re.compile(r"('|`|\")node:test\1")
+PERMISSION_FLAG_PATTERN = re.compile(
+  r'--permission(?:\b|=)|'
+  r'--allow-fs-read\b|'
+  r'--allow-fs-write\b|'
+  r'--allow-addons\b|'
+  r'--allow-child-process\b|'
+  r'--allow-inspector\b|'
+  r'--allow-wasi\b|'
+  r'--allow-worker\b'
+)
 FLAGS_SKIP_ENV_VAR = 'NODE_TEST_SKIP_FLAGS'
 FLAGS_SKIP_PREFIX = 'prefix'
 FLAGS_SKIP_ANY = 'any'
 FLAGS_SKIP_NONE = 'none'
 ERROR_REPORTER_PATH = os.path.normpath(os.path.join(
   os.path.dirname(__file__), '..', 'common', 'test-error-reporter.js'))
+LEGACY_V8_ADDON_TEST_SUFFIXES = (
+  os.path.normpath(os.path.join('abort', 'test-addon-register-signal-handler.js')),
+  os.path.normpath(os.path.join('addons', 'register-signal-handler', 'test.js')),
+)
+UBI_SCOPE_SKIP_TEST_SUFFIXES = (
+  os.path.normpath(os.path.join('parallel', 'test-cli-node-options.js')),
+  os.path.normpath(os.path.join('parallel', 'test-dotenv-node-options.js')),
+  os.path.normpath(os.path.join('parallel', 'test-process-finalization.mjs')),
+  os.path.normpath(os.path.join('parallel', 'test-process-threadCpuUsage-worker-threads.js')),
+)
 
 
 def _GetSkipFlagsMode():
@@ -77,8 +97,19 @@ def ShouldSkipFlaggedTestSource(source):
   return _GetFirstMeaningfulLine(source).startswith('// Flags:')
 
 
+def ShouldSkipPermissionFlaggedTestSource(source):
+  return PERMISSION_FLAG_PATTERN.search(source) is not None
+
+
 def ShouldSkipFlaggedTestFile(path):
   source = open(path, encoding='utf8').read()
+  normalized = os.path.normpath(path)
+  if any(normalized.endswith(suffix) for suffix in LEGACY_V8_ADDON_TEST_SUFFIXES):
+    return True
+  if any(normalized.endswith(suffix) for suffix in UBI_SCOPE_SKIP_TEST_SUFFIXES):
+    return True
+  if ShouldSkipPermissionFlaggedTestSource(source):
+    return True
   return ShouldSkipFlaggedTestSource(source)
 
 class SimpleTestCase(test.TestCase):

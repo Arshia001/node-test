@@ -40,11 +40,18 @@ For the tests to run on Windows, be sure to clone Node.js source code with the
 
 ## Cross-runtime runner
 
-Use `test/nodejs_test_harness` to run the JavaScript suites with a selectable
-runtime:
+Use `node-test/nodejs_test_harness` to run the JavaScript suites with a
+selectable runtime:
 
 ```sh
-NODE_TEST_RUNNER=node ./test/nodejs_test_harness
+NODE_TEST_RUNNER=node ./node-test/nodejs_test_harness
+```
+
+Repository-local `ubi` example:
+
+```sh
+NODE_TEST_RUNNER="$(pwd)/build-ubi-rename/ubi" \
+./node-test/nodejs_test_harness --category=node:assert
 ```
 
 This runner:
@@ -52,7 +59,7 @@ This runner:
 - Selects the runtime from `NODE_TEST_RUNNER`.
 - Uses `out/Release/node` (or `out/Debug/node`) when `NODE_TEST_RUNNER=node`.
 - Allows explicit Node path via `NODE_TEST_NODE_BINARY=/path/to/node`.
-- Uses `test/tools/deno-node-runner` automatically when
+- Uses `node-test/tools/deno-node-runner` automatically when
   `NODE_TEST_RUNNER=deno`.
 - Unsets `FORCE_COLOR` and `NO_COLOR` to avoid color-related snapshot noise.
 - Executes all suites that have a `testcfg.py`, excluding:
@@ -69,13 +76,13 @@ You can run only the tests that belong to one or more generated module
 categories:
 
 ```sh
-./test/nodejs_test_harness --category=node:assert
-./test/nodejs_test_harness --categories=node:assert,node:buffer
+./node-test/nodejs_test_harness --category=node:assert
+./node-test/nodejs_test_harness --categories=node:assert,node:buffer
 ```
 
 When category filters are used, the harness refreshes
-`test/module-categories/*.txt` via
-`test/tools/generate_test_module_categories.py` and expands the selected
+`node-test/module-categories/*.txt` via
+`node-test/tools/generate_test_module_categories.py` and expands the selected
 categories into explicit test paths before invoking `tools/test.py`.
 
 ### `// Flags:` skipping
@@ -90,11 +97,12 @@ Customize this behavior with `NODE_TEST_SKIP_FLAGS`:
 You can also exclude additional suites via `NODE_TEST_EXCLUDE_SUITES`
 (comma-separated list).
 
-The execution harness used by `execute_the_tests` is vendored in `test/tools/`
+The execution harness used by `execute_the_tests` is vendored in
+`node-test/tools/`
 (`test.py`, `utils.py`, `pseudo-tty.py`, `run-worker.js`, `run-valgrind.py`)
 so the runner does not depend on `../tools`.
 
-[^1]: [Documentation](../test/common/README.md)
+[^1]: [Documentation](./common/README.md)
 
 [^2]: Tests for networking related modules may also be present in other directories, but those tests do
     not make outbound connections.
