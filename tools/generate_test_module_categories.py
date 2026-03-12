@@ -198,6 +198,41 @@ STRONG_CONTENT_CATEGORIES = (
 CONTENT_IMPORT_PATTERN = re.compile(
     r"(?:require\(\s*|import\(\s*|from\s+)[\"']((?:node:)?[a-zA-Z0-9_./-]+)[\"']"
 )
+FLAGS_DIRECTIVE_PATTERN = re.compile(r"//\s+Flags:(.*)")
+SNAPSHOT_CLI_FLAG_PATTERN = re.compile(
+    r"--(?:build-snapshot(?:-config)?|(?:no-)?node-snapshot|snapshot-[a-z0-9-]+)"
+)
+
+CUSTOM_V8_EXACT_FLAGS = {
+    "--allow-natives-syntax",
+    "--allow_natives_syntax",
+    "--debug-arraybuffer-allocations",
+    "--disallow-code-generation-from-strings",
+    "--enable-sharedarraybuffer-per-context",
+    "--expose-gc",
+    "--expose_gc",
+    "--expose_externalize_string",
+    "--gc-global",
+    "--harmony-import-attributes",
+    "--jitless",
+    "--js-source-phase-imports",
+    "--no-concurrent-array-buffer-sweeping",
+    "--no-liftoff",
+    "--no-opt",
+    "--noconcurrent_recompilation",
+    "--predictable-gc-schedule",
+}
+
+CUSTOM_V8_PREFIX_FLAGS = (
+    "--gc-",
+    "--max-old-space-size",
+    "--max_old_space_size",
+    "--stress-",
+    "--trace-gc",
+    "--turbo-",
+    "--no-turbo-",
+    "--v8-pool-size",
+)
 
 SPECIAL_CASES = {
     "abort/test-addon-register-signal-handler.js": "node:process",
@@ -281,11 +316,11 @@ def resolve_runner() -> str:
         if explicit and os.access(explicit, os.X_OK):
             return explicit
 
-        release = TEST_ROOT.parent / "out" / "Release" / "node"
+        release = TEST_ROOT.parent / "node" / "out" / "Release" / "node"
         if os.access(release, os.X_OK):
             return str(release)
 
-        debug = TEST_ROOT.parent / "out" / "Debug" / "node"
+        debug = TEST_ROOT.parent / "node" / "out" / "Debug" / "node"
         if os.access(debug, os.X_OK):
             return str(debug)
 
@@ -307,6 +342,35 @@ def resolve_runner() -> str:
             return resolved
 
     return requested
+
+
+def parse_leading_flags_header(path: Path) -> list[str]:
+    try:
+        source = path.read_text(encoding="utf8", errors="ignore")
+    except OSError:
+        return []
+
+    flags: list[str] = []
+    for match in FLAGS_DIRECTIVE_PATTERN.finditer(source):
+        flags.extend(match.group(1).strip().split())
+    return flags
+
+
+def uses_custom_v8_flags(path: Path) -> bool:
+    for token in parse_leading_flags_header(path):
+        if token in CUSTOM_V8_EXACT_FLAGS:
+            return True
+        if any(token.startswith(prefix) for prefix in CUSTOM_V8_PREFIX_FLAGS):
+            return True
+    return False
+
+
+def uses_snapshot_cli_flags(path: Path) -> bool:
+    try:
+        source = path.read_text(encoding="utf8", errors="ignore")
+    except OSError:
+        return False
+    return SNAPSHOT_CLI_FLAG_PATTERN.search(source) is not None
 
 
 def selected_suites() -> list[str]:
@@ -336,71 +400,79 @@ def build_case_list() -> tuple[int, list[dict[str, str]]]:
     if not testmod.ProcessOptions(options):
         raise SystemExit("Could not initialize test.py options")
 
-    repositories = [
-        testmod.TestRepository(str(TEST_ROOT / name))
-        for name in testmod.GetSuites(str(TEST_ROOT))
-    ]
-    root_suite = testmod.LiteralTestSuite(repositories, str(TEST_ROOT))
-    paths = testmod.ArgsToTestPaths(
-        str(TEST_ROOT), suites, testmod.GetSuites(str(TEST_ROOT))
-    )
-    processor = testmod.GetSpecialCommandProcessor(options.special_command)
-    context = testmod.Context(
-        str(WORKSPACE),
-        testmod.VERBOSE,
-        options.shell,
-        options.node_args,
-        options.expect_fail,
-        options.timeout,
-        processor,
-        options.suppress_dialogs,
-        options.store_unexpected_output,
-        options.repeat,
-        options.abort_on_timeout,
-    )
+    original_skip_flags = os.environ.get("NODE_TEST_SKIP_FLAGS")
+    os.environ["NODE_TEST_SKIP_FLAGS"] = "none"
+    try:
+        repositories = [
+            testmod.TestRepository(str(TEST_ROOT / name))
+            for name in testmod.GetSuites(str(TEST_ROOT))
+        ]
+        root_suite = testmod.LiteralTestSuite(repositories, str(TEST_ROOT))
+        paths = testmod.ArgsToTestPaths(
+            str(TEST_ROOT), suites, testmod.GetSuites(str(TEST_ROOT))
+        )
+        processor = testmod.GetSpecialCommandProcessor(options.special_command)
+        context = testmod.Context(
+            str(WORKSPACE),
+            testmod.VERBOSE,
+            options.shell,
+            options.node_args,
+            options.expect_fail,
+            options.timeout,
+            processor,
+            options.suppress_dialogs,
+            options.store_unexpected_output,
+            options.repeat,
+            options.abort_on_timeout,
+        )
 
-    for requested_mode in options.mode:
-        if requested_mode:
-            context.default_mode = requested_mode
-            break
-    else:
-        context.default_mode = "none"
+        for requested_mode in options.mode:
+            if requested_mode:
+                context.default_mode = requested_mode
+                break
+        else:
+            context.default_mode = "none"
 
-    sections = []
-    defs = {}
-    root_suite.GetTestStatus(context, sections, defs)
-    config = testmod.Configuration(sections, defs)
+        sections = []
+        defs = {}
+        root_suite.GetTestStatus(context, sections, defs)
+        config = testmod.Configuration(sections, defs)
 
-    all_cases = []
-    for arch in options.arch:
-        for mode in options.mode:
-            vm = context.GetVm(arch, mode)
-            if not os.path.exists(vm):
-                continue
-
-            if "llrt" in vm:
-                vm_arch = "arm64"
-            else:
-                arch_context = testmod.Execute([vm, "-p", "process.arch"], context)
-                vm_arch = arch_context.stdout.rstrip()
-                if arch_context.exit_code != 0 or vm_arch == "undefined":
+        all_cases = []
+        for arch in options.arch:
+            for mode in options.mode:
+                vm = context.GetVm(arch, mode)
+                if not os.path.exists(vm):
                     continue
 
-            env = {
-                "mode": mode,
-                "system": testmod.utils.GuessOS(),
-                "arch": vm_arch,
-                "type": testmod.get_env_type(vm, options.type, context),
-                "asan": testmod.get_asan_state(vm, context),
-                "pointer_compression": testmod.get_pointer_compression_state(
-                    vm, context
-                ),
-            }
+                if "llrt" in vm:
+                    vm_arch = "arm64"
+                else:
+                    arch_context = testmod.Execute([vm, "-p", "process.arch"], context)
+                    vm_arch = arch_context.stdout.rstrip()
+                    if arch_context.exit_code != 0 or vm_arch == "undefined":
+                        continue
 
-            for path in paths:
-                test_list = root_suite.ListTests([], path, context, arch, mode)
-                cases, _ = config.ClassifyTests(test_list, env)
-                all_cases.extend(cases)
+                env = {
+                    "mode": mode,
+                    "system": testmod.utils.GuessOS(),
+                    "arch": vm_arch,
+                    "type": testmod.get_env_type(vm, options.type, context),
+                    "asan": testmod.get_asan_state(vm, context),
+                    "pointer_compression": testmod.get_pointer_compression_state(
+                        vm, context
+                    ),
+                }
+
+                for path in paths:
+                    test_list = root_suite.ListTests([], path, context, arch, mode)
+                    cases, _ = config.ClassifyTests(test_list, env)
+                    all_cases.extend(cases)
+    finally:
+        if original_skip_flags is None:
+            os.environ.pop("NODE_TEST_SKIP_FLAGS", None)
+        else:
+            os.environ["NODE_TEST_SKIP_FLAGS"] = original_skip_flags
 
     discovered = len(all_cases)
     cases_to_run = [
@@ -417,12 +489,17 @@ def build_case_list() -> tuple[int, list[dict[str, str]]]:
     records = []
     for case in sorted(cases_to_run, key=lambda item: item.file):
         relfile = os.path.relpath(case.file, TEST_ROOT).replace(os.sep, "/")
+        abspath = Path(case.file)
+        if uses_custom_v8_flags(abspath):
+            continue
+        if uses_snapshot_cli_flags(abspath):
+            continue
         records.append(
             {
                 "relfile": relfile,
                 "suite": relfile.split("/", 1)[0],
                 "basename": Path(relfile).stem.lower(),
-                "abspath": case.file,
+                "abspath": str(abspath),
             }
         )
 
@@ -826,6 +903,11 @@ def main() -> int:
         default=str(TEST_ROOT / "module-categories"),
         help="Directory that will receive the generated .txt files.",
     )
+    parser.add_argument(
+        "--write",
+        action="store_true",
+        help="Write the generated category files to --output-dir.",
+    )
     args = parser.parse_args()
 
     discovered, records = build_case_list()
@@ -852,7 +934,8 @@ def main() -> int:
     if len(seen) != len(records):
         raise ValueError("Not all runnable tests were assigned to a category")
 
-    write_category_files(Path(args.output_dir), categorized)
+    if args.write:
+        write_category_files(Path(args.output_dir), categorized)
 
     print(f"Discovered: {discovered}")
     print(f"Skipped: {discovered - len(records)}")

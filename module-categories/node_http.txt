@@ -28,7 +28,6 @@ known_issues/test-http-path-contains-unicode.js
 parallel/test-async-hooks-http-parser-destroy.js
 parallel/test-client-request-destroy.js
 parallel/test-fetch.mjs
-parallel/test-gc-http-client-connaborted.js
 parallel/test-http-1.0-keep-alive.js
 parallel/test-http-1.0.js
 parallel/test-http-abort-before-end.js
@@ -41,7 +40,6 @@ parallel/test-http-after-connect.js
 parallel/test-http-agent-abort-controller.js
 parallel/test-http-agent-close.js
 parallel/test-http-agent-destroyed-socket.js
-parallel/test-http-agent-domain-reused-gc.js
 parallel/test-http-agent-error-on-idle.js
 parallel/test-http-agent-false.js
 parallel/test-http-agent-getname.js
@@ -108,7 +106,6 @@ parallel/test-http-client-insecure-http-parser-error.js
 parallel/test-http-client-invalid-path.js
 parallel/test-http-client-keep-alive-hint.js
 parallel/test-http-client-keep-alive-release-before-finish.js
-parallel/test-http-client-leaky-with-double-response.js
 parallel/test-http-client-override-global-agent.js
 parallel/test-http-client-parse-error.js
 parallel/test-http-client-pipe-end.js
@@ -258,7 +255,6 @@ parallel/test-http-outgoing-renderHeaders.js
 parallel/test-http-outgoing-settimeout.js
 parallel/test-http-outgoing-writableFinished.js
 parallel/test-http-outgoing-write-types.js
-parallel/test-http-parser-bad-ref.js
 parallel/test-http-parser-finish-error.js
 parallel/test-http-parser-free.js
 parallel/test-http-parser-freed-before-upgrade.js
@@ -311,7 +307,6 @@ parallel/test-http-response-splitting.js
 parallel/test-http-response-status-message.js
 parallel/test-http-response-statuscode.js
 parallel/test-http-response-writehead-returns-this.js
-parallel/test-http-same-map.js
 parallel/test-http-server-async-dispose.js
 parallel/test-http-server-capture-rejections.js
 parallel/test-http-server-clear-timer.js
@@ -321,7 +316,6 @@ parallel/test-http-server-close-destroy-timeout.js
 parallel/test-http-server-close-idle-wait-response.js
 parallel/test-http-server-close-idle.js
 parallel/test-http-server-connection-list-when-close.js
-parallel/test-http-server-connections-checking-leak.js
 parallel/test-http-server-consumed-timeout.js
 parallel/test-http-server-de-chunked-trailer.js
 parallel/test-http-server-delete-parser.js
@@ -336,7 +330,6 @@ parallel/test-http-server-keep-alive-defaults.js
 parallel/test-http-server-keep-alive-max-requests-null.js
 parallel/test-http-server-keep-alive-timeout.js
 parallel/test-http-server-keepalive-end.js
-parallel/test-http-server-keepalive-req-gc.js
 parallel/test-http-server-method.query.js
 parallel/test-http-server-multiheaders.js
 parallel/test-http-server-multiheaders2.js
@@ -415,9 +408,6 @@ parallel/test-outgoing-message-destroy.js
 parallel/test-pipe-abstract-socket-http.js
 parallel/test-set-http-max-http-headers.js
 parallel/test-set-incoming-message-header.js
-sequential/test-gc-http-client-onerror.js
-sequential/test-gc-http-client-timeout.js
-sequential/test-gc-http-client.js
 sequential/test-http-econnrefused.js
 sequential/test-http-keep-alive-large-write.js
 sequential/test-http-keepalive-maxsockets.js

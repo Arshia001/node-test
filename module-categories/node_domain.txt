@@ -1,6 +1,5 @@
 parallel/test-domain-abort-on-uncaught.js
 parallel/test-domain-add-remove.js
-parallel/test-domain-async-id-map-leak.js
 parallel/test-domain-bind-timeout.js
 parallel/test-domain-crypto.js
 parallel/test-domain-dep0097.js
@@ -9,7 +8,6 @@ parallel/test-domain-ee-implicit.js
 parallel/test-domain-ee.js
 parallel/test-domain-emit-error-handler-stack.js
 parallel/test-domain-enter-exit.js
-parallel/test-domain-error-types.js
 parallel/test-domain-from-timer.js
 parallel/test-domain-fs-enoent-stream.js
 parallel/test-domain-http-server.js

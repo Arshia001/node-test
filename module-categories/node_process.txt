@@ -5,11 +5,8 @@ known_issues/test-cwd-enoent-file.js
 message/node_run_non_existent.js
 message/test-testpy-env-var-via-comment.js
 parallel/test-abort-controller-any-timeout.js
-parallel/test-abortcontroller-internal.js
-parallel/test-abortcontroller.js
 parallel/test-abortsignal-any.mjs
 parallel/test-abortsignal-cloneable.js
-parallel/test-abortsignal-drop-settled-signals.mjs
 parallel/test-beforeexit-event-exit.js
 parallel/test-cli-eval-event.js
 parallel/test-cli-eval.js
@@ -57,7 +54,6 @@ parallel/test-process-dlopen-undefined-exports.js
 parallel/test-process-domain-segfault.js
 parallel/test-process-emit.js
 parallel/test-process-emitwarning.js
-parallel/test-process-env-allowed-flags-are-documented.js
 parallel/test-process-env-allowed-flags.js
 parallel/test-process-env-delete.js
 parallel/test-process-env-deprecation.js
@@ -100,8 +96,6 @@ parallel/test-process-getactiveresources-track-multiple-timers.js
 parallel/test-process-getactiveresources-track-timer-lifetime.js
 parallel/test-process-getactiveresources.js
 parallel/test-process-getgroups.js
-parallel/test-process-hrtime-bigint.js
-parallel/test-process-hrtime.js
 parallel/test-process-initgroups.js
 parallel/test-process-kill-null.js
 parallel/test-process-kill-pid.js

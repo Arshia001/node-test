@@ -9,7 +9,6 @@ parallel/test-sqlite-database-sync.js
 parallel/test-sqlite-named-parameters.js
 parallel/test-sqlite-session.js
 parallel/test-sqlite-statement-sync-columns.js
-parallel/test-sqlite-statement-sync.js
 parallel/test-sqlite-template-tag.js
 parallel/test-sqlite-timeout.js
 parallel/test-sqlite-transactions.js

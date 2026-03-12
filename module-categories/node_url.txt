@@ -17,7 +17,6 @@ parallel/test-url-urltooptions.js
 parallel/test-urlpattern-invalidthis.js
 parallel/test-urlpattern-types.js
 parallel/test-urlpattern.js
-parallel/test-whatwg-url-canparse.js
 parallel/test-whatwg-url-custom-deepequal.js
 parallel/test-whatwg-url-custom-global.js
 parallel/test-whatwg-url-custom-href-side-effect.js

@@ -73,7 +73,6 @@ parallel/test-https-server-async-dispose.js
 parallel/test-https-server-close-all.js
 parallel/test-https-server-close-destroy-timeout.js
 parallel/test-https-server-close-idle.js
-parallel/test-https-server-connections-checking-leak.js
 parallel/test-https-server-headers-timeout.js
 parallel/test-https-server-options-incoming-message.js
 parallel/test-https-server-options-server-response.js

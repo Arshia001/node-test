@@ -1,5 +1,4 @@
 parallel/test-debug-process.js
-parallel/test-debug-v8-fast-api.js
 parallel/test-debugger-address.mjs
 parallel/test-debugger-auto-resume.mjs
 parallel/test-debugger-backtrace.js

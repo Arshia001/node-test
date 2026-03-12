@@ -41,7 +41,6 @@ parallel/test-vm-context-async-script.js
 parallel/test-vm-context-dont-contextify.js
 parallel/test-vm-context-property-forwarding.js
 parallel/test-vm-context.js
-parallel/test-vm-create-and-run-in-context.js
 parallel/test-vm-create-context-accessors.js
 parallel/test-vm-create-context-arg.js
 parallel/test-vm-create-context-circular-reference.js
@@ -68,7 +67,6 @@ parallel/test-vm-indexed-properties.js
 parallel/test-vm-inherited_properties.js
 parallel/test-vm-is-context.js
 parallel/test-vm-low-stack-space.js
-parallel/test-vm-measure-memory-lazy.js
 parallel/test-vm-measure-memory-multi-context.js
 parallel/test-vm-measure-memory.js
 parallel/test-vm-module-after-evaluate.js
@@ -86,11 +84,6 @@ parallel/test-vm-module-hasasyncgraph.js
 parallel/test-vm-module-hastoplevelawait.js
 parallel/test-vm-module-instantiate.js
 parallel/test-vm-module-link-shared-deps.js
-parallel/test-vm-module-link.js
-parallel/test-vm-module-linkmodulerequests-circular.js
-parallel/test-vm-module-linkmodulerequests-deep.js
-parallel/test-vm-module-linkmodulerequests.js
-parallel/test-vm-module-modulerequests.js
 parallel/test-vm-module-reevaluate.js
 parallel/test-vm-module-referrer-realm.mjs
 parallel/test-vm-module-synthetic.js
@@ -107,7 +100,6 @@ parallel/test-vm-preserves-property.js
 parallel/test-vm-property-not-on-sandbox.js
 parallel/test-vm-proxies.js
 parallel/test-vm-proxy-failure-CP.js
-parallel/test-vm-run-in-new-context.js
 parallel/test-vm-script-after-evaluate.js
 parallel/test-vm-script-throw-in-tostring.js
 parallel/test-vm-set-property-proxy.js

@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs');
 const { pathToFileURL } = require('url');
 
-const fixturesDir = path.join(__dirname, '..', 'fixtures');
+const fixturesDir = process.env.NODE_TEST_FIXTURES_DIR ||
+  path.join(__dirname, '..', 'fixtures');
 
 function fixturesPath(...args) {
   return path.join(fixturesDir, ...args);

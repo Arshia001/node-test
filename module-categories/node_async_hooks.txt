@@ -10,7 +10,6 @@ async-hooks/test-async-local-storage-dgram.js
 async-hooks/test-async-local-storage-enable-disable.js
 async-hooks/test-async-local-storage-enter-with.js
 async-hooks/test-async-local-storage-errors.js
-async-hooks/test-async-local-storage-gcable.js
 async-hooks/test-async-local-storage-http-agent.js
 async-hooks/test-async-local-storage-http.js
 async-hooks/test-async-local-storage-misc-stores.js
@@ -25,7 +24,6 @@ async-hooks/test-async-wrap-providers.js
 async-hooks/test-callback-error.js
 async-hooks/test-crypto-pbkdf2.js
 async-hooks/test-crypto-randomBytes.js
-async-hooks/test-destroy-not-blocked.js
 async-hooks/test-disable-in-init.js
 async-hooks/test-embedder.api.async-resource-no-type.js
 async-hooks/test-embedder.api.async-resource.js
@@ -67,11 +65,9 @@ async-hooks/test-net-get-connections.js
 async-hooks/test-nexttick-default-trigger.js
 async-hooks/test-no-assert-when-disabled.js
 async-hooks/test-pipeconnectwrap.js
-async-hooks/test-pipewrap.js
 async-hooks/test-promise.chain-promise-before-init-hooks.js
 async-hooks/test-promise.js
 async-hooks/test-promise.promise-before-init-hooks.js
-async-hooks/test-querywrap.js
 async-hooks/test-queue-microtask.js
 async-hooks/test-shutdownwrap.js
 async-hooks/test-signalwrap.js
@@ -94,9 +90,7 @@ parallel/test-async-hooks-asyncresource-constructor.js
 parallel/test-async-hooks-close-during-destroy.js
 parallel/test-async-hooks-constructor.js
 parallel/test-async-hooks-correctly-switch-promise-hook.js
-parallel/test-async-hooks-destroy-on-gc.js
 parallel/test-async-hooks-disable-during-promise.js
-parallel/test-async-hooks-disable-gc-tracking.js
 parallel/test-async-hooks-enable-before-promise-resolve.js
 parallel/test-async-hooks-enable-disable-enable.js
 parallel/test-async-hooks-enable-disable.js
@@ -107,7 +101,6 @@ parallel/test-async-hooks-execution-async-resource.js
 parallel/test-async-hooks-fatal-error.js
 parallel/test-async-hooks-http-agent-destroy.js
 parallel/test-async-hooks-http-agent.js
-parallel/test-async-hooks-prevent-double-destroy.js
 parallel/test-async-hooks-promise-enable-disable.js
 parallel/test-async-hooks-promise-triggerid.js
 parallel/test-async-hooks-promise.js
@@ -118,7 +111,6 @@ parallel/test-async-hooks-stack-overflow-nested-async.js
 parallel/test-async-hooks-stack-overflow-try-catch.js
 parallel/test-async-hooks-stack-overflow.js
 parallel/test-async-hooks-top-level-clearimmediate.js
-parallel/test-async-hooks-vm-gc.js
 parallel/test-async-hooks-worker-asyncfn-terminate-1.js
 parallel/test-async-hooks-worker-asyncfn-terminate-2.js
 parallel/test-async-hooks-worker-asyncfn-terminate-3.js
@@ -143,4 +135,3 @@ parallel/test-asyncresource-bind.js
 parallel/test-emit-after-uncaught-exception.js
 parallel/test-queue-microtask-uncaught-asynchooks.js
 pseudo-tty/test-async-wrap-getasyncid-tty.js
-sequential/test-async-wrap-getasyncid.js

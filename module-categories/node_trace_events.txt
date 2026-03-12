@@ -2,7 +2,6 @@ parallel/test-trace-env-stack.js
 parallel/test-trace-env.js
 parallel/test-trace-events-all.js
 parallel/test-trace-events-api-worker-disabled.js
-parallel/test-trace-events-api.js
 parallel/test-trace-events-async-hooks-dynamic.js
 parallel/test-trace-events-async-hooks-worker.js
 parallel/test-trace-events-async-hooks.js

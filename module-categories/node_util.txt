@@ -7,7 +7,6 @@ parallel/test-coverage-with-inspector-disabled.js
 parallel/test-debugger-random-port-with-inspect-port.js
 parallel/test-eslint-inspector-check.js
 parallel/test-eventtarget-custom-inspect-does-not-throw.js
-parallel/test-inspect-address-in-use.js
 parallel/test-inspect-async-hook-setup-at-inspect.js
 parallel/test-inspect-publish-uid.js
 parallel/test-inspect-support-for-node_options.js
@@ -28,7 +27,6 @@ parallel/test-inspector-connect-main-thread.js
 parallel/test-inspector-connect-to-main-thread.js
 parallel/test-inspector-console-top-frame.js
 parallel/test-inspector-console.js
-parallel/test-inspector-contexts.js
 parallel/test-inspector-debug-async-hook.js
 parallel/test-inspector-debug-brk-flag.js
 parallel/test-inspector-debug-end.js
@@ -112,7 +110,6 @@ parallel/test-util-stripvtcontrolcharacters.js
 parallel/test-util-styletext.js
 parallel/test-util-text-decoder.js
 parallel/test-util-types-exists.js
-parallel/test-util-types.js
 parallel/test-util.js
 parallel/test-webstream-encoding-inspect.js
 parallel/test-worker-message-port-inspect-during-init-hook.js

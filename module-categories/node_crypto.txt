@@ -15,7 +15,6 @@ parallel/test-crypto-dh-curves.js
 parallel/test-crypto-dh-errors.js
 parallel/test-crypto-dh-generate-keys.js
 parallel/test-crypto-dh-group-setters.js
-parallel/test-crypto-dh-leak.js
 parallel/test-crypto-dh-modp2-views.js
 parallel/test-crypto-dh-modp2.js
 parallel/test-crypto-dh-odd-key.js
@@ -159,5 +158,4 @@ parallel/test-webcrypto-util.js
 parallel/test-webcrypto-webidl.js
 parallel/test-webcrypto-wrap-unwrap.js
 parallel/test-x509-escaping.js
-sequential/test-crypto-timing-safe-equal-fast.js
 sequential/test-crypto-timing-safe-equal.js

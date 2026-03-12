@@ -50,7 +50,6 @@ parallel/test-tls-connect-allow-half-open-option.js
 parallel/test-tls-connect-given-socket.js
 parallel/test-tls-connect-hints-option.js
 parallel/test-tls-connect-hwm-option.js
-parallel/test-tls-connect-memleak.js
 parallel/test-tls-connect-no-host.js
 parallel/test-tls-connect-pipe.js
 parallel/test-tls-connect-secure-context.js
@@ -199,7 +198,6 @@ parallel/test-tls-timeout-server.js
 parallel/test-tls-tlswrap-segfault-2.js
 parallel/test-tls-tlswrap-segfault.js
 parallel/test-tls-translate-peer-certificate.js
-parallel/test-tls-transport-destroy-after-own-gc.js
 parallel/test-tls-use-after-free-regression.js
 parallel/test-tls-wrap-econnreset-localaddress.js
 parallel/test-tls-wrap-econnreset-pipe.js

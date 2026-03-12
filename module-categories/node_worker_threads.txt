@@ -1,6 +1,5 @@
 abort/test-worker-abort-uncaught-exception.js
 parallel/test-bootstrap-modules.js
-parallel/test-code-cache.js
 parallel/test-datetime-change-notify.js
 parallel/test-is-internal-thread.mjs
 parallel/test-messagechannel.js
@@ -17,7 +16,6 @@ parallel/test-worker-cjs-workerdata.js
 parallel/test-worker-cleanexit-with-js.js
 parallel/test-worker-cleanexit-with-moduleload.js
 parallel/test-worker-cleanup-handles.js
-parallel/test-worker-cli-options.js
 parallel/test-worker-console-listeners.js
 parallel/test-worker-cpu-profile.js
 parallel/test-worker-cpu-usage.js
@@ -52,7 +50,6 @@ parallel/test-worker-internal-modules.mjs
 parallel/test-worker-invalid-workerdata.js
 parallel/test-worker-load-file-with-extension-other-than-js.js
 parallel/test-worker-memory.js
-parallel/test-worker-message-channel-sharedarraybuffer.js
 parallel/test-worker-message-channel.js
 parallel/test-worker-message-event.js
 parallel/test-worker-message-mark-as-uncloneable.js
@@ -91,11 +88,9 @@ parallel/test-worker-messaging-errors-timeout.js
 parallel/test-worker-messaging.js
 parallel/test-worker-mjs-workerdata.js
 parallel/test-worker-name.js
-parallel/test-worker-nearheaplimit-deadlock.js
 parallel/test-worker-nested-on-process-exit.js
 parallel/test-worker-nested-uncaught.js
 parallel/test-worker-nexttick-terminate.js
-parallel/test-worker-no-sab.js
 parallel/test-worker-no-stdin-stdout-interaction.js
 parallel/test-worker-node-options.js
 parallel/test-worker-non-fatal-uncaught-exception.js
@@ -114,7 +109,6 @@ parallel/test-worker-relative-path-double-dot.js
 parallel/test-worker-relative-path.js
 parallel/test-worker-resource-limits.js
 parallel/test-worker-safe-getters.js
-parallel/test-worker-sharedarraybuffer-from-worker-thread.js
 parallel/test-worker-stack-overflow-stack-size.js
 parallel/test-worker-stack-overflow.js
 parallel/test-worker-stdio-flush-inflight.js
@@ -144,7 +138,6 @@ parallel/test-worker-vm-context-terminate.js
 parallel/test-worker-voluntarily-exit-followed-by-addition.js
 parallel/test-worker-voluntarily-exit-followed-by-throw.js
 parallel/test-worker-workerdata-messageport.js
-parallel/test-worker-workerdata-sharedarraybuffer.js
 parallel/test-worker.js
 parallel/test-worker.mjs
 report/test-report-worker.js

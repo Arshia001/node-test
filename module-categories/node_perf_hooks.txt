@@ -1,6 +1,5 @@
 parallel/test-perf-gc-crash.js
 parallel/test-perf-hooks-eventlooputilization.js
-parallel/test-perf-hooks-histogram-fast-calls.js
 parallel/test-perf-hooks-histogram.js
 parallel/test-perf-hooks-resourcetiming.js
 parallel/test-perf-hooks-timerify-basic.js
@@ -14,7 +13,6 @@ parallel/test-perf-hooks-timerify-return-value.js
 parallel/test-perf-hooks-usertiming.js
 parallel/test-perf-hooks-worker-timeorigin.js
 parallel/test-performance-function-async.js
-parallel/test-performance-gc.js
 parallel/test-performance-global.js
 parallel/test-performance-many-marks.js
 parallel/test-performance-measure-detail.js
@@ -39,4 +37,3 @@ sequential/test-cpu-prof-kill.js
 sequential/test-cpu-prof-name.js
 sequential/test-cpu-prof-worker-argv.js
 sequential/test-perf-hooks.js
-sequential/test-performance-eventloopdelay.js

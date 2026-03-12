@@ -96,7 +96,6 @@ parallel/test-http2-create-client-secure-session.js
 parallel/test-http2-create-client-session.js
 parallel/test-http2-createsecureserver-options.js
 parallel/test-http2-createserver-options.js
-parallel/test-http2-createwritereq.js
 parallel/test-http2-date-header.js
 parallel/test-http2-debug.js
 parallel/test-http2-destroy-after-write.js
@@ -226,7 +225,6 @@ parallel/test-http2-server-startup.js
 parallel/test-http2-server-stream-session-destroy.js
 parallel/test-http2-server-timeout.js
 parallel/test-http2-server-unknown-protocol.js
-parallel/test-http2-session-gc-while-write-scheduled.js
 parallel/test-http2-session-graceful-close.js
 parallel/test-http2-session-settings.js
 parallel/test-http2-session-stream-state.js
@@ -261,7 +259,6 @@ parallel/test-http2-util-update-options-buffer.js
 parallel/test-http2-window-size.js
 parallel/test-http2-write-callbacks.js
 parallel/test-http2-write-empty-string.js
-parallel/test-http2-write-finishes-after-stream-destroy.js
 parallel/test-http2-zero-length-header.js
 parallel/test-http2-zero-length-write.js
 sequential/test-http2-large-file.js

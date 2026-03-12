@@ -2,7 +2,6 @@ es-module/test-cjs-esm-warn.js
 es-module/test-cjs-legacyMainResolve.js
 es-module/test-cjs-prototype-pollution.js
 es-module/test-disable-require-module-with-detection.js
-es-module/test-dynamic-import-script-lifetime.js
 es-module/test-esm-assert-strict.mjs
 es-module/test-esm-assertionless-json-import.js
 es-module/test-esm-basic-imports.mjs
@@ -207,13 +206,9 @@ es-module/test-typescript-eval.mjs
 es-module/test-typescript-module.mjs
 es-module/test-typescript-transform.mjs
 es-module/test-typescript.mjs
-es-module/test-vm-compile-function-leak.js
 es-module/test-vm-compile-function-lineoffset.js
-es-module/test-vm-contextified-script-leak.js
 es-module/test-vm-main-context-default-loader-eval.js
 es-module/test-vm-main-context-default-loader.js
-es-module/test-vm-source-text-module-leak.js
-es-module/test-vm-synthetic-module-leak.js
 es-module/test-wasm-memory-out-of-bound.js
 es-module/test-wasm-simple.js
 module-hooks/test-async-loader-hooks-called-with-expected-args.mjs
@@ -374,7 +369,6 @@ parallel/test-require-symlink.js
 parallel/test-require-unicode.js
 parallel/test-shadow-realm-custom-loaders.js
 parallel/test-shadow-realm-preload-module.js
-parallel/test-source-map-cjs-require-cache.js
 parallel/test-vm-module-import-meta.js
 sea/test-single-executable-application-asset-keys-empty.js
 sea/test-single-executable-application-asset-keys.js

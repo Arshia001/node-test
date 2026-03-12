@@ -58,7 +58,6 @@ parallel/test-buffer-tostring-4gb.js
 parallel/test-buffer-tostring-range.js
 parallel/test-buffer-tostring-rangeerror.js
 parallel/test-buffer-tostring.js
-parallel/test-buffer-write-fast.js
 parallel/test-buffer-write.js
 parallel/test-buffer-writedouble.js
 parallel/test-buffer-writefloat.js
@@ -70,5 +69,4 @@ parallel/test-buffer-zero-fill.js
 parallel/test-file.js
 parallel/test-global-setters.js
 parallel/test-icu-transcode.js
-parallel/test-internal-util-construct-sab.js
 sequential/test-buffer-creation-regression.js
