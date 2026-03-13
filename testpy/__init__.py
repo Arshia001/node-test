@@ -56,7 +56,7 @@ LEGACY_V8_ADDON_TEST_SUFFIXES = (
   os.path.normpath(os.path.join('abort', 'test-addon-register-signal-handler.js')),
   os.path.normpath(os.path.join('addons', 'register-signal-handler', 'test.js')),
 )
-UBI_SCOPE_SKIP_TEST_SUFFIXES = (
+EDGE_SCOPE_SKIP_TEST_SUFFIXES = (
   os.path.normpath(os.path.join('parallel', 'test-cli-node-options.js')),
   os.path.normpath(os.path.join('parallel', 'test-dotenv-node-options.js')),
   os.path.normpath(os.path.join('parallel', 'test-process-finalization.mjs')),
@@ -106,7 +106,7 @@ def ShouldSkipFlaggedTestFile(path):
   normalized = os.path.normpath(path)
   if any(normalized.endswith(suffix) for suffix in LEGACY_V8_ADDON_TEST_SUFFIXES):
     return True
-  if any(normalized.endswith(suffix) for suffix in UBI_SCOPE_SKIP_TEST_SUFFIXES):
+  if any(normalized.endswith(suffix) for suffix in EDGE_SCOPE_SKIP_TEST_SUFFIXES):
     return True
   if ShouldSkipPermissionFlaggedTestSource(source):
     return True
