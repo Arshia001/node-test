@@ -35,8 +35,8 @@ if (process.config.variables.node_use_amaro) {
     expected_keys.push('amaro');
   }
 }
-if (process.config.variables.node_is_ubi) {
-  expected_keys.push("ubi");
+if (process.config.variables.node_is_edge) {
+  expected_keys.push('edge');
 }
 if (hasUndici) {
   expected_keys.push('undici');
