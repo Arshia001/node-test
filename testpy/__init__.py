@@ -63,6 +63,38 @@ EDGE_SCOPE_SKIP_TEST_SUFFIXES = (
   os.path.normpath(os.path.join('parallel', 'test-process-threadCpuUsage-worker-threads.js')),
 )
 
+WASIX_SLOW_TESTS_ENV = 'WASIX_SLOW_TESTS'
+WASIX_SLOW_TEST_TIMEOUT_SCALE_ENV = 'WASIX_SLOW_TEST_TIMEOUT_SCALE'
+
+
+def _GetWasixSlowTests():
+  raw = os.environ.get(WASIX_SLOW_TESTS_ENV, '')
+  result = set()
+  for item in raw.split(','):
+    item = item.strip()
+    if not item:
+      continue
+    result.add(os.path.normpath(item))
+  return result
+
+
+def _GetWasixSlowTestTimeoutScale():
+  raw = os.environ.get(WASIX_SLOW_TEST_TIMEOUT_SCALE_ENV, '12').strip()
+  try:
+    return float(raw)
+  except ValueError:
+    print(': Unknown %s=%s, using 12' % (WASIX_SLOW_TEST_TIMEOUT_SCALE_ENV, raw))
+    return 12.0
+
+
+def _IsWasixSlowTest(path):
+  slow_tests = _GetWasixSlowTests()
+  if not slow_tests:
+    return False
+  rel_path = os.path.normpath(os.path.join(*path) + '.js')
+  rel_path_mjs = os.path.normpath(os.path.join(*path) + '.mjs')
+  return rel_path in slow_tests or rel_path_mjs in slow_tests
+
 
 def _GetSkipFlagsMode():
   value = os.environ.get(FLAGS_SKIP_ENV_VAR, FLAGS_SKIP_PREFIX).strip().lower()
@@ -120,6 +152,8 @@ class SimpleTestCase(test.TestCase):
     self.config = config
     self.arch = arch
     self.mode = mode
+    self.timeout_scale = (_GetWasixSlowTestTimeoutScale()
+                          if _IsWasixSlowTest(path) else 1)
     if additional is not None:
       self.additional_flags = additional
     else:

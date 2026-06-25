@@ -589,9 +589,11 @@ class TestCase(object):
 
   def RunCommand(self, command, env):
     full_command = self.context.processor(command)
+    timeout = self.context.GetTimeout(self.mode, self.config.section)
+    timeout *= getattr(self, 'timeout_scale', 1)
     output = Execute(full_command,
                      self.context,
-                     self.context.GetTimeout(self.mode, self.config.section),
+                     timeout,
                      env,
                      disable_core_files = self.disable_core_files,
                      max_virtual_memory = self.max_virtual_memory)
